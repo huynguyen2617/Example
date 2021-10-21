@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Task List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Task List</h1>
+        <button class="btn" id="back">Back</button>
+        <div class="input-field">
+            <input type="text" id="new-task" name="task">
+            <label for="task">New Task</label>
+        </div>
+        <button class="btn" id="add-new-task">Add Task</button>
+        <button class="btn" id="sort-task">Sort</button>
+        <button class="btn" id="search">Search</button> 
+        <ul class="collection">
+            
+        </ul>
+        <a id="delete-all" class="btn">Clear Tasks</a>
+        
+    </div>
+    <script type="module" src='./main.js'></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</body>
+
+</html>
