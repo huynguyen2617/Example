@@ -25,16 +25,18 @@ function RenderUI(array) {
     array.forEach(value => addTask(value));
 }
 
-const taskArr = JSON.parse(localStorage.getItem("tasks"));
-if (taskArr) {
-    RenderUI(taskArr);
-}
 /************************************************************************/
+let arrTasks = [];
 document.getElementById("add-new-task").addEventListener("click", () => {
     const input = document.getElementById("new-task").value;
-    localStorage.setItem("tasks", JSON.stringify([input]))
     addTask(input);
+    // document.getElementById("new-task").value = null;
+    arrTasks.push(input);
+    localStorage.setItem("Task", JSON.stringify(arrTasks));
+
 })
+// const Arr_Task = JSON.parse(localStorage.getItem("Task"));
+
 
 const RemoveTask = (li) => {
     li.remove();
@@ -45,22 +47,29 @@ const UpdateTask = (li) => {
     li.firstChild.textContent = data;
 }
 
-document.getElementById("delete-all").addEventListener("click", () => RenderUI([]))
 
-document.getElementById("sort-task").addEventListener("click", () => {
-    const li = document.getElementsByClassName("collection-item");
-    const arrayValue = [...li].map(li => li.firstChild.textContent);
-    arrayValue.sort((a,b) => a.localeCompare(b)); 
-    RenderUI(arrayValue);
+
+document.getElementById("delete-all").addEventListener("click", () => {
+    RenderUI([]);
+    // localStorage.removeItem("Task");
+    localStorage.clear();
 })
 
-let arrTasks = [];
+document.getElementById("back").addEventListener("click", () => {
+    const Arr_Task = JSON.parse(localStorage.getItem("Task"));//json.parse chuyen doi van ban thanh 1 doi tuong javascript
+    RenderUI(Arr_Task);
+})
+
+document.getElementById("sort-task").addEventListener("click", () => {
+    const Arr_Task = JSON.parse(localStorage.getItem("Task"));
+    Arr_Task.sort((a,b) => a.localeCompare(b)); 
+    RenderUI(Arr_Task);
+})
+
 document.getElementById("search").addEventListener("click", () => {
     const input = document.getElementById("new-task").value;
-    const li = document.getElementsByClassName("collection-item");
-    const arrayValue = [...li].map(li => li.firstChild.textContent);
-    arrTasks = [...arrayValue];
-    const result = arrayValue.filter(v => v == input);
+    const Arr_Task = JSON.parse(localStorage.getItem("Task"));
+    const result = Arr_Task.filter(v => v == input);
     if (result.length > 0) {
         RenderUI(result);
     } else {
@@ -68,9 +77,7 @@ document.getElementById("search").addEventListener("click", () => {
     }
 })
 
-document.getElementById("back").addEventListener("click", () => {
-    RenderUI(arrTasks);
-})
+
 
 
 //localStorage
